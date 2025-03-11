@@ -1,5 +1,5 @@
 /*
- *   dn_allocator.c - Custom allocator interface and implementations written in C.
+ *   qrk_arena_allocator.h - Custom allocator interface and implementations written in C.
  *   Copyright (C) 2025 Bekir Kağan Karaahmetoğlu <kagankaraahmetoglu@hotmail.com>
  *
  *   This program is free software: you can redistribute it and/or modify
@@ -16,13 +16,32 @@
  *   along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#include <denovo/dn_allocator.h>
-#include <stdlib.h>
+#pragma once
 
-void* dn_alloc(usize size) {
-    return malloc(size);
-}
+#ifdef __cplusplus
+extern "C" {
+#endif
 
-void dn_free(void* ptr) {
-    free(ptr);
+#include "qrk_allocator.h"
+
+#ifndef QRK_ARENA_ALIGNMENT
+#define QRK_ARENA_ALIGNMENT sizeof(void*)
+#endif
+
+typedef struct qrk_ArenaAllocator {
+    u8* buffer;
+    usize buffer_size;
+    usize prev_offset;
+    usize curr_offset;
+    usize align;
+} QRK_ArenaAllocator;
+
+QRK_Allocator qrk_arena_create(QRK_ArenaAllocator* arena);
+void qrk_arena_init(QRK_ArenaAllocator* arena, u8* buffer, usize buffer_size, usize align);
+void qrk_arena_deinit(QRK_ArenaAllocator* arena);
+void qrk_arena_reset(QRK_ArenaAllocator* arena);
+void* qrk_arena_alloc(void* arena, usize size);
+
+#ifdef __cplusplus
 }
+#endif

@@ -1,5 +1,5 @@
 /*
- *   dn_allocator.h - Custom allocator interface and implementations written in C.
+ *   qrk_types.h - Custom allocator interface and implementations written in C.
  *   Copyright (C) 2025 Bekir Kağan Karaahmetoğlu <kagankaraahmetoglu@hotmail.com>
  *
  *   This program is free software: you can redistribute it and/or modify
@@ -22,18 +22,31 @@
 extern "C" {
 #endif
 
-#include "dn_types.h"
+#include <stdint.h>
 
-typedef struct DN_Allocator {
-    void* context;
-    void* (*alloc)(void* ctx, usize size);
-    void* (*resize)();
-    void* (*remap)();
-    void (*free)(void* ctx, void* ptr);
-} DN_Allocator;
+typedef int8_t i8;
+typedef int16_t i16;
+typedef int32_t i32;
+typedef int64_t i64;
 
-void* dn_alloc(usize size);
-void dn_free(void* ptr);
+typedef uint8_t u8;
+typedef uint16_t u16;
+typedef uint32_t u32;
+typedef uint64_t u64;
+
+typedef float f32;
+typedef double f64;
+
+typedef uint8_t b8;
+typedef uint32_t b32;
+
+typedef intptr_t iptr;
+typedef uintptr_t uptr;
+
+typedef size_t usize;
+
+typedef char* str;
+typedef const char* cstr;
 
 #ifdef __cplusplus
 }

@@ -16,20 +16,20 @@
  *   along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-#include <denovo/dn_arena_allocator.h>
+#include <quark/qrk_arena_allocator.h>
 #include <stdio.h>
 
 int main(void) {
     u8 arena_buffer[256] = {0};
 
-    DN_ArenaAllocator arena = {0};
-    DN_Allocator allocator = dn_arena_create(&arena);
-    dn_arena_init(&arena, arena_buffer, 256, DN_ARENA_ALIGNMENT);
+    QRK_ArenaAllocator arena = {0};
+    QRK_Allocator allocator = qrk_arena_create(&arena);
+    qrk_arena_init(&arena, arena_buffer, 256, QRK_ARENA_ALIGNMENT);
 
     i32* num = allocator.alloc(&arena, sizeof(i32));
     *num = 5;
     printf("%d\n", *num);
 
-    dn_arena_reset(&arena);
+    qrk_arena_reset(&arena);
     return 0;
 }
