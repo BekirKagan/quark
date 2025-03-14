@@ -27,7 +27,7 @@ target_link_directories(${PROJECT_NAME} INTERFACE
     ${PROJECT_BINARY_DIR})
 
 add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy
+    COMMAND ${CMAKE_COMMAND} -E create_symlink
     ${CMAKE_BINARY_DIR}/compile_commands.json
     ${CMAKE_SOURCE_DIR}/compile_commands.json
 )
