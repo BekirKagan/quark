@@ -23,6 +23,10 @@ void* qrk_alloc(usize size) {
     return malloc(size);
 }
 
+void* qrk_resize(void* ptr, usize size) {
+    return realloc(ptr, size);
+}
+
 void qrk_free(void* ptr) {
     free(ptr);
 }

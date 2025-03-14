@@ -27,12 +27,13 @@ extern "C" {
 typedef struct QRK_Allocator {
     void* context;
     void* (*alloc)(void* ctx, usize size);
-    void* (*resize)();
+    void* (*resize)(void* ctx, void* ptr, usize size);
     void* (*remap)();
     void (*free)(void* ctx, void* ptr);
 } QRK_Allocator;
 
 void* qrk_alloc(usize size);
+void* qrk_resize(void* ptr, usize size);
 void qrk_free(void* ptr);
 
 #ifdef __cplusplus
